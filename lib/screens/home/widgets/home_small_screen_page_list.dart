@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:stylish_max/models/product_category.dart';
+import 'package:stylish_max/screens/home/component/home_page_list_title.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_list_item.dart';
 
-class HomePageList extends StatefulWidget {
-  const HomePageList({
+class HomeSmallScreenPageList extends StatefulWidget {
+  const HomeSmallScreenPageList({
     super.key,
-    required this.isBigScreen,
     required this.productCategory,
   });
 
-  final bool isBigScreen;
   final ProductCategory productCategory;
 
   @override
-  State<HomePageList> createState() => _HomePageListState();
+  State<HomeSmallScreenPageList> createState() =>
+      _HomeSmallScreenPageListState();
 }
 
-class _HomePageListState extends State<HomePageList>
+class _HomeSmallScreenPageListState extends State<HomeSmallScreenPageList>
     with AutomaticKeepAliveClientMixin {
   bool isExpanded = true;
 
@@ -30,15 +30,13 @@ class _HomePageListState extends State<HomePageList>
       children: [
         GestureDetector(
           onTap: () {
-            if (!widget.isBigScreen) {
-              setState(() {
-                isExpanded = !isExpanded;
-              });
-            }
+            setState(() {
+              isExpanded = !isExpanded;
+            });
           },
-          child: Text(widget.productCategory.title),
+          child: HomePageListTitle(title: widget.productCategory.title),
         ),
-        widget.isBigScreen || isExpanded
+        isExpanded
             ? Column(
                 children: widget.productCategory.productList
                     .map((product) => HomePageListItem(product: product))

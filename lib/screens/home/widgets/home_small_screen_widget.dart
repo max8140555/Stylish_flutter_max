@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stylish_max/models/product_category.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_banner.dart';
-import 'package:stylish_max/screens/home/widgets/home_page_list.dart';
+import 'package:stylish_max/screens/home/widgets/home_small_screen_page_list.dart';
 
 class HomeSmallScreenWidget extends StatelessWidget {
   const HomeSmallScreenWidget({super.key, required this.productCategoryList});
@@ -18,8 +18,7 @@ class HomeSmallScreenWidget extends StatelessWidget {
           return const HomePageBanner();
         }
 
-        return HomePageList(
-          isBigScreen: isBigScreen,
+        return HomeSmallScreenPageList(
           productCategory: productCategoryList[index - 1],
         );
       },
