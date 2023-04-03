@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
 
 void main() {
@@ -16,6 +17,9 @@ class StylishApp extends StatelessWidget {
         primaryColor: Colors.grey[200],
       ),
       home: const HomePage(),
+      routes: {
+        DetailPage.routeName:(context) => DetailPage()
+      },
     );
   }
 }

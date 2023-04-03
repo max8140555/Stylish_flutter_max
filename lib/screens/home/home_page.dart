@@ -21,38 +21,47 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     productList = [
       Product(
+          productId: "0",
           title: "最新男士大衣",
           price: 100,
           imageUrl: 'assets/images/home_banner_image.jpeg'),
       Product(
+          productId: "0",
           title: "最新男士中衣",
           price: 200,
           imageUrl: 'assets/images/home_banner_image.jpeg'),
       Product(
+          productId: "0",
           title: "最新男士小衣",
           price: 300,
           imageUrl: 'assets/images/stylish_logo.png'),
       Product(
+          productId: "0",
           title: "最新男士中衣",
           price: 400,
           imageUrl: 'assets/images/home_banner_image.jpeg'),
       Product(
+          productId: "0",
           title: "最新男士小衣",
           price: 500,
           imageUrl: 'assets/images/stylish_logo.png'),
       Product(
+          productId: "0",
           title: "最新男士大衣",
           price: 600,
           imageUrl: 'assets/images/home_banner_image.jpeg'),
       Product(
+          productId: "0",
           title: "最新男士大衣",
           price: 700,
           imageUrl: 'assets/images/stylish_logo.png'),
       Product(
+          productId: "0",
           title: "最新男士小衣",
           price: 800,
           imageUrl: 'assets/images/home_banner_image.jpeg'),
       Product(
+          productId: "0",
           title: "最新男士中衣",
           price: 900,
           imageUrl: 'assets/images/stylish_logo.png'),
@@ -73,7 +82,8 @@ class _HomePageState extends State<HomePage> {
         if (isBigScreen) {
           return HomeBigScreenWidget(productCategoryList: productCategoryList);
         } else {
-          return HomeSmallScreenWidget(productCategoryList: productCategoryList);
+          return HomeSmallScreenWidget(
+              productCategoryList: productCategoryList);
         }
       }
 
