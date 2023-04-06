@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stylish_max/screens/detail/detail_page.dart';
+import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
 
 void main() {
@@ -18,7 +20,11 @@ class StylishApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: {
-        DetailPage.routeName:(context) => DetailPage()
+        DetailPage.routeName: (context) =>
+            ChangeNotifierProvider<DetailPageViewModel>(
+              create: (_) => DetailPageViewModel(),
+              child: DetailPage(),
+            ),
       },
     );
   }

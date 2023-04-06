@@ -13,7 +13,7 @@ class HomePageListItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, DetailPage.routeName);
+          Navigator.pushNamed(context, DetailPage.routeName, arguments: product);
         },
         child: Container(
           decoration: BoxDecoration(

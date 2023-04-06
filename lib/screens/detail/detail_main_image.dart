@@ -9,8 +9,6 @@ class DetailMainImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
-        child: Image.asset(imageUrl));
+    return Image.asset(imageUrl, fit: BoxFit.cover);
   }
 }
