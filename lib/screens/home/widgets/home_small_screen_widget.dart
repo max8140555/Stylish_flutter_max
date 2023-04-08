@@ -39,7 +39,7 @@ class HomeSmallScreenPageList extends StatefulWidget {
   State<HomeSmallScreenPageList> createState() =>
       _HomeSmallScreenPageListState();
 }
-
+  
 class _HomeSmallScreenPageListState extends State<HomeSmallScreenPageList>
     with AutomaticKeepAliveClientMixin {
   bool isExpanded = true;
