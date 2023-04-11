@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stylish_max/models/product_detail.dart';
+import 'package:stylish_max/network/bloc/product_bloc.dart';
 import 'package:stylish_max/screens/detail/component/color_selector_list.dart';
 import 'package:stylish_max/screens/detail/component/product_selector.dart';
 import 'package:stylish_max/screens/detail/component/size_selector_list.dart';
@@ -8,7 +10,9 @@ import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/values/text_styles.dart';
 
 class DetailProductSelector extends StatelessWidget {
-  const DetailProductSelector({super.key});
+  const DetailProductSelector({super.key, required this.productDetail});
+
+  final ProductDetail productDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class DetailProductSelector extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16),
               child: Text(
-                viewModel.productDetail.title,
+                productDetail.title,
                 textAlign: TextAlign.start,
                 style: bigTextStyle,
               ),
@@ -28,7 +32,7 @@ class DetailProductSelector extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                viewModel.productDetail.productId,
+                productDetail.productId,
                 textAlign: TextAlign.start,
                 style: smallTextStyle,
               ),
@@ -36,7 +40,7 @@ class DetailProductSelector extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 32, bottom: 64),
               child: Text(
-                "NT\$ ${viewModel.productDetail.price}",
+                "NT\$ ${productDetail.price}",
                 textAlign: TextAlign.start,
                 style: midTextStyle,
               ),
@@ -46,7 +50,7 @@ class DetailProductSelector extends StatelessWidget {
               child: ProductSelector(
                   title: "顏色",
                   widget: ColorSelectorList(
-                    colors: viewModel.productDetail.colors,
+                    colors: productDetail.colors,
                     selectedColorInt: viewModel.selectedColorInt,
                     selectedColorListener: viewModel.updateSelectColor,
                   )),
@@ -56,7 +60,7 @@ class DetailProductSelector extends StatelessWidget {
               child: ProductSelector(
                   title: "尺寸",
                   widget: SizeSelectorList(
-                    sizes: viewModel.productDetail.sizes,
+                    sizes: productDetail.sizes,
                     selectedSize: viewModel.selectSize,
                     selectedSizeListener: viewModel.updateSelectSize,
                   )),
