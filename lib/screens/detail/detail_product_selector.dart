@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stylish_max/models/product_detail.dart';
-import 'package:stylish_max/network/bloc/product_bloc.dart';
 import 'package:stylish_max/screens/detail/component/color_selector_list.dart';
 import 'package:stylish_max/screens/detail/component/product_selector.dart';
 import 'package:stylish_max/screens/detail/component/size_selector_list.dart';

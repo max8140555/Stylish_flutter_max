@@ -5,8 +5,8 @@ import 'package:stylish_max/models/stock.dart';
 class DetailPageViewModel extends ChangeNotifier {
   ProductDetail productDetail = ProductDetail();
 
-  void updateProductDetail(ProductDetail? productDetail) {
-    productDetail = productDetail;
+  void updateProductDetail(ProductDetail data) {
+    productDetail = data;
     notifyListeners();
   }
 
