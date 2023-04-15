@@ -1,13 +1,13 @@
 part of 'product_bloc.dart';
 
 @immutable
-abstract class ProductDetailEvent {
-  factory ProductDetailEvent.getProductDetailEvent(String productId) =>
-      GetProductDetailEvent(productId: productId);
+abstract class ProductListEvent {
+  factory ProductListEvent.getProductListEvent(String category) =>
+      GetProductListEvent(category: category);
 }
 
-class GetProductDetailEvent implements ProductDetailEvent {
-  final String productId;
+class GetProductListEvent implements ProductListEvent {
+  final String category;
 
-  GetProductDetailEvent({required this.productId});
+  GetProductListEvent({required this.category});
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish_max/models/product_detail.dart';
 import 'package:stylish_max/network/api_state.dart';
 import 'package:stylish_max/network/bloc/product_bloc.dart';
+import 'package:stylish_max/network/model/response_product_list.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
-import 'package:stylish_max/screens/detail/detail_product_selector.dart';
 import 'package:stylish_max/widgets/stylish_app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +19,8 @@ class DetailPage extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as String? ?? "";
 
     context
-        .read<ProductDetailBloc>()
-        .add(ProductDetailEvent.getProductDetailEvent(productId));
+        .read<ProductListBloc>()
+        .add(ProductListEvent.getProductListEvent(productId));
 
     return LayoutBuilder(builder: (context, constraints) {
       bool isBigScreen = constraints.maxWidth >= 800;
@@ -33,7 +32,7 @@ class DetailPage extends StatelessWidget {
               body: SafeArea(
                 child: GestureDetector(
                   onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                  child: BlocBuilder<ProductDetailBloc, ApiState>(
+                  child: BlocBuilder<ProductListBloc, ApiState>(
                       builder: (context, state) {
                     if (state is ApiLoadingState) {
                       return const Center(
@@ -46,13 +45,13 @@ class DetailPage extends StatelessWidget {
                       );
                     }
                     if (state is ApiSuccessState) {
-                      var data = state.data as ProductDetail;
-                      viewModel.updateProductDetail(data);
+                      var data = state.data as ResponseProductList;
+                      // viewModel.updateProductDetail(data);
 
                       return Center(
                           child: isBigScreen
-                              ? DetailPageBigScreen(productDetail: data)
-                              : DetailPageSmallScreen(productDetail: data));
+                              ? DetailPageBigScreen()
+                              : DetailPageSmallScreen());
                     }
                     return Container();
                   }),
@@ -65,45 +64,45 @@ class DetailPage extends StatelessWidget {
 }
 
 class DetailPageBigScreen extends StatelessWidget {
-  const DetailPageBigScreen({super.key, required this.productDetail});
+  const DetailPageBigScreen({super.key});
 
-  final ProductDetail productDetail;
+  // final ProductDetail productDetail;
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 32, top: 32, bottom: 32),
-              child: Image.asset(productDetail.imageUrl),
-            )),
-        Expanded(
-          flex: 5,
-          child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: DetailProductSelector(productDetail: productDetail)),
-        )
-      ],
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      // children: [
+      //   Expanded(
+      //       flex: 5,
+      //       child: Padding(
+      //         padding: const EdgeInsets.only(left: 32, top: 32, bottom: 32),
+      //         child: Image.asset(productDetail.imageUrl),
+      //       )),
+      //   Expanded(
+      //     flex: 5,
+      //     child: Padding(
+      //         padding: const EdgeInsets.all(32),
+      //         child: DetailProductSelector(productDetail: productDetail)),
+      //   )
+      // ],
     );
   }
 }
 
 class DetailPageSmallScreen extends StatelessWidget {
-  const DetailPageSmallScreen({super.key, required this.productDetail});
+  const DetailPageSmallScreen({super.key});
 
-  final ProductDetail productDetail;
+  // final ProductDetail productDetail;
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 90),
-      children: [
-        Image.asset(productDetail.imageUrl),
-        DetailProductSelector(productDetail: productDetail),
-        const SizedBox(height: 300),
-      ],
+      // padding: const EdgeInsets.symmetric(horizontal: 90),
+      // children: [
+      //   Image.asset(productDetail.imageUrl),
+      //   DetailProductSelector(productDetail: productDetail),
+      //   const SizedBox(height: 300),
+      // ],
     );
   }
 }

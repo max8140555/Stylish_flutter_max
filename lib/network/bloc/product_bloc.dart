@@ -2,25 +2,22 @@
 import 'package:bloc/bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
-import 'package:stylish_max/models/product_detail.dart';
+import 'package:stylish_max/models/product.dart';
 import 'package:stylish_max/network/api_state.dart';
-import 'package:stylish_max/network/repository/product_repository.dart';
+import 'package:stylish_max/network/repository/stylish_repository.dart';
 
 part 'product_event.dart';
 
-class ProductDetailBloc extends Bloc<ProductDetailEvent, ApiState<ProductDetail>> {
-  final ProductRepository _productRepository;
+class ProductListBloc extends Bloc<ProductListEvent, ApiState<ProductList>> {
+  final StylishRepository _stylishRepository;
 
-  ProductDetailBloc(this._productRepository) : super(ApiState.initial()) {
-    on<ProductDetailEvent>((event, emit) async {
+  ProductListBloc(this._stylishRepository) : super(ApiState.initial()) {
+    on<ProductListEvent>((event, emit) async {
       try {
-            final getProductDetailEvent = event as GetProductDetailEvent;
-            final productId = getProductDetailEvent.productId;
+            final getProductDetailEvent = event as GetProductListEvent;
+            final category = getProductDetailEvent.category;
             emit(ApiState.loading());
-            var data = await _productRepository.getProductDetail(productId);
-
-            await Future.delayed(const Duration(seconds: 3)); // 添加3秒延迟
-
+            var data = await _stylishRepository.getProductList(category);
             emit(ApiState.success(data));
           
       } catch (e) {

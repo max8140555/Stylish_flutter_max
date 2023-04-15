@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:stylish_max/network/bloc/product_bloc.dart';
-import 'package:stylish_max/network/repository/product_repository.dart';
+import 'package:stylish_max/network/repository/stylish_repository.dart';
 import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
@@ -16,12 +16,12 @@ class StylishApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductRepository productRepository = ProductRepositoryImpl();
+    StylishRepository stylishRepository = StylishRepositoryImpl();
 
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => ProductDetailBloc(productRepository),
+            create: (_) => ProductListBloc(stylishRepository),
           ),
         ],
         child: MaterialApp(

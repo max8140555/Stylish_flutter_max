@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:stylish_max/models/product_category.dart';
-import 'package:stylish_max/screens/home/component/home_page_list_title.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_banner.dart';
-import 'package:stylish_max/screens/home/widgets/home_page_list_item.dart';
 
 class HomeSmallScreenWidget extends StatelessWidget {
-  const HomeSmallScreenWidget({super.key, required this.productCategoryList});
+   HomeSmallScreenWidget({super.key, });
 
   final bool isBigScreen = false;
-  final List<ProductCategory> productCategoryList;
+  final List<DoNothingAction> productCategoryList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,7 @@ class HomeSmallScreenWidget extends StatelessWidget {
         }
 
         return HomeSmallScreenPageList(
-          productCategory: productCategoryList[index - 1],
+          // productCategory: productCategoryList[index - 1],
         );
       },
     );
@@ -30,10 +27,9 @@ class HomeSmallScreenWidget extends StatelessWidget {
 class HomeSmallScreenPageList extends StatefulWidget {
   const HomeSmallScreenPageList({
     super.key,
-    required this.productCategory,
   });
 
-  final ProductCategory productCategory;
+  // final ProductCategory productCategory = [];
 
   @override
   State<HomeSmallScreenPageList> createState() =>
@@ -51,23 +47,23 @@ class _HomeSmallScreenPageListState extends State<HomeSmallScreenPageList>
   Widget build(BuildContext context) {
     super.build(context);
     return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          child: HomePageListTitle(title: widget.productCategory.title),
-        ),
-        isExpanded
-            ? Column(
-                children: widget.productCategory.productList
-                    .map((product) => HomePageListItem(product: product))
-                    .toList(),
-              )
-            : Container(),
-      ],
+      // children: [
+      //   GestureDetector(
+      //     onTap: () {
+      //       setState(() {
+      //         isExpanded = !isExpanded;
+      //       });
+      //     },
+      //     child: HomePageListTitle(title: widget.productCategory.title),
+      //   ),
+      //   isExpanded
+      //       ? Column(
+      //           children: widget.productCategory.productList
+      //               .map((product) => HomePageListItem(product: product))
+      //               .toList(),
+      //         )
+      //       : Container(),
+      // ],
     );
   }
 }

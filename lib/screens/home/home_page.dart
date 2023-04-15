@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stylish_max/models/product.dart';
-import 'package:stylish_max/models/product_category.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish_max/network/bloc/product_bloc.dart';
 import 'package:stylish_max/screens/home/widgets/home_big_screen_widget.dart';
 import 'package:stylish_max/screens/home/widgets/home_small_screen_widget.dart';
 import 'package:stylish_max/widgets/stylish_app_bar.dart';
@@ -13,77 +13,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late List<Product> productList;
-  late List<ProductCategory> productCategoryList;
+  late List<DoNothingAction> productList;
 
   @override
   void initState() {
     super.initState();
-    productList = [
-      Product(
-          productId: "0",
-          title: "最新男士大衣",
-          price: 100,
-          imageUrl: 'assets/images/home_banner_image.jpeg'),
-      Product(
-          productId: "1",
-          title: "最新男士中衣",
-          price: 200,
-          imageUrl: 'assets/images/home_banner_image.jpeg'),
-      Product(
-          productId: "2",
-          title: "最新男士小衣",
-          price: 300,
-          imageUrl: 'assets/images/stylish_logo.png'),
-      Product(
-          productId: "3",
-          title: "最新男士中衣",
-          price: 400,
-          imageUrl: 'assets/images/home_banner_image.jpeg'),
-      Product(
-          productId: "4",
-          title: "最新男士小衣",
-          price: 500,
-          imageUrl: 'assets/images/stylish_logo.png'),
-      Product(
-          productId: "5",
-          title: "最新男士大衣",
-          price: 600,
-          imageUrl: 'assets/images/home_banner_image.jpeg'),
-      Product(
-          productId: "6",
-          title: "最新男士大衣",
-          price: 700,
-          imageUrl: 'assets/images/stylish_logo.png'),
-      Product(
-          productId: "7",
-          title: "最新男士小衣",
-          price: 800,
-          imageUrl: 'assets/images/home_banner_image.jpeg'),
-      Product(
-          productId: "8",
-          title: "最新男士中衣",
-          price: 900,
-          imageUrl: 'assets/images/stylish_logo.png'),
-    ];
-    productCategoryList = [
-      ProductCategory(title: "男裝", productList: productList),
-      ProductCategory(title: "女裝", productList: productList),
-      ProductCategory(title: "配件", productList: productList),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
+    // final dio = Dio();
+
+    // Future<ResponseProductList> getHttp() async {
+    //   final response =
+    //       await dio.get('https://api.appworks-school.tw/api/1.0/products/all');
+    //   print("Max123 ${ResponseProductList.fromJson(response.extra)}");
+    //   return ResponseProductList.fromJson(response.extra);
+    // }
+
+    context
+        .read<ProductListBloc>()
+        .add(ProductListEvent.getProductListEvent("men"));
+
     return LayoutBuilder(builder: (context, constraints) {
       bool isBigScreen = constraints.maxWidth >= 600;
-
+      // var a = getHttp();
       Widget getScreen() {
         if (isBigScreen) {
-          return HomeBigScreenWidget(productCategoryList: productCategoryList);
+          return HomeBigScreenWidget();
         } else {
-          return HomeSmallScreenWidget(
-              productCategoryList: productCategoryList);
+          return HomeSmallScreenWidget();
         }
       }
 
@@ -98,3 +57,38 @@ class _HomePageState extends State<HomePage> {
     });
   }
 }
+
+// GestureDetector(
+//               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+//               child: BlocBuilder<ProductListBloc, ApiState>(
+//                   builder: (context, state) {
+//                 if (state is ApiLoadingState) {
+//                   print("Max123 ApiLoadingState");
+
+//                   return const Center(
+//                     child: CircularProgressIndicator(),
+//                   );
+//                 }
+//                 if (state is ApiErrorState) {
+//                   print("Max123 ApiErrorState ${state.errorMsg}");
+
+//                   return Center(
+//                     child: Text(state.errorMsg),
+//                   );
+//                 }
+//                 if (state is ApiSuccessState) {
+//                   print("Max123 ApiSuccessState");
+
+//                   var data = state.data as ResponseProductList;
+//                   // viewModel.updateProductDetail(data);
+
+//                   return Center(
+//                       child: isBigScreen
+//                           ? HomeBigScreenWidget()
+//                           : HomeSmallScreenWidget());
+//                 }
+//                 print("Max123 ??");
+
+//                 return Container();
+//               }),
+//             ),
