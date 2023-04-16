@@ -33,7 +33,7 @@ ResponseDatum _$ResponseDatumFromJson(Map<String, dynamic> json) =>
       place: json['place'] as String?,
       note: json['note'] as String?,
       story: json['story'] as String?,
-      mainImage: json['mainImage'] as String?,
+      mainImage: json['main_image'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       variants: (json['variants'] as List<dynamic>?)
@@ -59,7 +59,7 @@ Map<String, dynamic> _$ResponseDatumToJson(ResponseDatum instance) =>
       'place': instance.place,
       'note': instance.note,
       'story': instance.story,
-      'mainImage': instance.mainImage,
+      'main_image': instance.mainImage,
       'images': instance.images,
       'variants': instance.variants,
       'colors': instance.colors,
@@ -67,10 +67,12 @@ Map<String, dynamic> _$ResponseDatumToJson(ResponseDatum instance) =>
     };
 
 const _$ResponseSizeEnumMap = {
+  ResponseSize.XS: 'XS',
   ResponseSize.S: 'S',
   ResponseSize.M: 'M',
   ResponseSize.L: 'L',
   ResponseSize.XL: 'XL',
+  ResponseSize.F: 'F',
 };
 
 ResponseColor _$ResponseColorFromJson(Map<String, dynamic> json) =>

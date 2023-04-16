@@ -73,7 +73,7 @@ class ResponseColor {
   Map<String, dynamic> toJson() => _$ResponseColorToJson(this);
 }
 
-enum ResponseSize { S, M, L, XL }
+enum ResponseSize { XS, S, M, L, XL, F }
 
 @JsonSerializable()
 class ResponseVariant {

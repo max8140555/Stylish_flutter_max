@@ -56,9 +56,10 @@ class StylishRepositoryImpl implements StylishRepository {
       nextPaging: responseData.nextPaging,
     );
 
+    print("Max123 $response");
     cacheMap[category] = ProductList(
         category: category,
-        data: (cacheMap[category]?.data ?? []) + newData.data,
+        data: (cacheMap[category]?.data ?? []) + newData.data + newData.data + newData.data,
         nextPaging: newData.nextPaging);
 
     return cacheMap[category] ?? emptyProductList;
