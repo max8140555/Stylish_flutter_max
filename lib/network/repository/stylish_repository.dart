@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:stylish_max/models/product.dart';
+import 'package:stylish_max/network/dio_api.dart';
 import 'package:stylish_max/network/model/response_product_list.dart';
 
 abstract class StylishRepository {
@@ -8,7 +9,7 @@ abstract class StylishRepository {
 }
 
 class StylishRepositoryImpl implements StylishRepository {
-  final dio = Dio();
+  final dioApi = DioApi();
 
   Map<String, ProductList> cacheMap = {};
 
@@ -16,18 +17,15 @@ class StylishRepositoryImpl implements StylishRepository {
   Future<ProductList> getProductList(String category, bool isLoadMore) async {
     final emptyProductList = ProductList(category: "", data: [], nextPaging: null);
 
-    String url = "";
-    if (cacheMap[category] != null && isLoadMore) {
-      if (cacheMap[category]?.nextPaging != null) {
-        url = "https://api.appworks-school.tw/api/1.0/products/$category?paging=${cacheMap[category]?.nextPaging}";
-      }
+    bool isNeedCallApi = false;
+    if (cacheMap[category] != null && isLoadMore && cacheMap[category]?.nextPaging != null) {
+      isNeedCallApi = true;
     } else if (cacheMap[category] == null) {
-      url = "https://api.appworks-school.tw/api/1.0/products/$category";
+      isNeedCallApi = true;
     }
 
-    if (url.isNotEmpty) {
-      final response = await dio.get(url);
-      var responseData = ResponseProductList.fromJson(response.data);
+    if (isNeedCallApi) {
+      var responseData = await dioApi.getProductList(category, cacheMap[category]?.nextPaging);
       var newData = ProductList(
         category: category,
         data: responseData.data?.map((it) => convertProduct(it)).toList() ?? [],
@@ -42,8 +40,7 @@ class StylishRepositoryImpl implements StylishRepository {
 
   @override
   Future<Product?> getProductDetail(String productId) async {
-    final response = await dio.get("https://api.appworks-school.tw/api/1.0/products/details?id=$productId");
-    var responseData = ResponseProduct.fromJson(response.data);
+    var responseData = await dioApi.getSingleProduct(productId);
     var newData = responseData.data != null ? convertProduct(responseData.data!) : null;
     return newData;
   }
