@@ -14,7 +14,7 @@ class MultipleProductBloc extends Bloc<MultipleProductEvent, MultipleProductStat
       try {
         final category = event.category;
         emit(MultipleProductState.loading());
-        var data = await _stylishRepository.getProductList(category);
+        var data = await _stylishRepository.getProductList(category, false);
         emit(MultipleProductState.success(data));
       } catch (e) {
         emit(MultipleProductState.error(e.toString()));

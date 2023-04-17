@@ -3,29 +3,39 @@ import 'package:stylish_max/models/product.dart';
 import 'package:stylish_max/network/model/response_product_list.dart';
 
 abstract class StylishRepository {
-  Future<ProductList> getProductList(String category);
+  Future<ProductList> getProductList(String category, bool isLoadMore);
   Future<Product?> getProductDetail(String productId);
 }
 
 class StylishRepositoryImpl implements StylishRepository {
   final dio = Dio();
 
-  final emptyProductList = ProductList(category: "", data: [], nextPaging: null);
   Map<String, ProductList> cacheMap = {};
 
   @override
-  Future<ProductList> getProductList(String category) async {
-    final response = await dio.get("https://api.appworks-school.tw/api/1.0/products/$category");
-    var responseData = ResponseProductList.fromJson(response.data);
+  Future<ProductList> getProductList(String category, bool isLoadMore) async {
+    final emptyProductList = ProductList(category: "", data: [], nextPaging: null);
 
-    var newData = ProductList(
-      category: category,
-      data: responseData.data?.map((it) => convertProduct(it)).toList() ?? [],
-      nextPaging: responseData.nextPaging,
-    );
+    String url = "";
+    if (cacheMap[category] != null && isLoadMore) {
+      if (cacheMap[category]?.nextPaging != null) {
+        url = "https://api.appworks-school.tw/api/1.0/products/$category?paging=${cacheMap[category]?.nextPaging}";
+      }
+    } else if (cacheMap[category] == null) {
+      url = "https://api.appworks-school.tw/api/1.0/products/$category";
+    }
 
-    cacheMap[category] = ProductList(
-        category: category, data: (cacheMap[category]?.data ?? []) + newData.data + newData.data + newData.data, nextPaging: newData.nextPaging);
+    if (url.isNotEmpty) {
+      final response = await dio.get(url);
+      var responseData = ResponseProductList.fromJson(response.data);
+      var newData = ProductList(
+        category: category,
+        data: responseData.data?.map((it) => convertProduct(it)).toList() ?? [],
+        nextPaging: responseData.nextPaging,
+      );
+      cacheMap[category] =
+          ProductList(category: category, data: (cacheMap[category]?.data ?? []) + newData.data + newData.data, nextPaging: newData.nextPaging);
+    }
 
     return cacheMap[category] ?? emptyProductList;
   }
