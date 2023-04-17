@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stylish_max/models/product.dart';
-import 'package:stylish_max/screens/detail/detail_page.dart';
 
 class HomePageListItem extends StatelessWidget {
   const HomePageListItem({super.key, required this.product});
@@ -14,7 +14,10 @@ class HomePageListItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, DetailPage.routeName);
+          context.goNamed(
+            "product",
+            params: {"productId": "${product.id}"},
+          );
         },
         child: Container(
           decoration: BoxDecoration(

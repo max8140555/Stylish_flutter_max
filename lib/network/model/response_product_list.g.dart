@@ -11,14 +11,26 @@ ResponseProductList _$ResponseProductListFromJson(Map<String, dynamic> json) =>
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => ResponseDatum.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextPaging: json['nextPaging'] as int?,
+      nextPaging: json['next_paging'] as int?,
     );
 
 Map<String, dynamic> _$ResponseProductListToJson(
         ResponseProductList instance) =>
     <String, dynamic>{
       'data': instance.data,
-      'nextPaging': instance.nextPaging,
+      'next_paging': instance.nextPaging,
+    };
+
+ResponseProduct _$ResponseProductFromJson(Map<String, dynamic> json) =>
+    ResponseProduct(
+      data: json['data'] == null
+          ? null
+          : ResponseDatum.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ResponseProductToJson(ResponseProduct instance) =>
+    <String, dynamic>{
+      'data': instance.data,
     };
 
 ResponseDatum _$ResponseDatumFromJson(Map<String, dynamic> json) =>
@@ -89,14 +101,14 @@ Map<String, dynamic> _$ResponseColorToJson(ResponseColor instance) =>
 
 ResponseVariant _$ResponseVariantFromJson(Map<String, dynamic> json) =>
     ResponseVariant(
-      colorCode: json['colorCode'] as String?,
+      colorCode: json['color_code'] as String?,
       size: $enumDecodeNullable(_$ResponseSizeEnumMap, json['size']),
       stock: json['stock'] as int?,
     );
 
 Map<String, dynamic> _$ResponseVariantToJson(ResponseVariant instance) =>
     <String, dynamic>{
-      'colorCode': instance.colorCode,
+      'color_code': instance.colorCode,
       'size': _$ResponseSizeEnumMap[instance.size],
       'stock': instance.stock,
     };

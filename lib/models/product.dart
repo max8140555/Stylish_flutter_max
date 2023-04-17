@@ -42,12 +42,32 @@ class Product {
   String mainImage;
   List<String> images;
   List<Variant> variants;
-  List<Color> colors;
+  List<MyColor> colors;
   List<String> sizes;
+
+  static Product getDefaultProduct() {
+    return Product(
+        id: -1,
+        category: "",
+        title: "",
+        description: "",
+        price: 0,
+        texture: "",
+        wash: "",
+        place: "",
+        note: "",
+        story: "",
+        mainImage: "",
+        images: [],
+        variants: [],
+        colors: [],
+        sizes: []);
+  }
+
 }
 
-class Color {
-  Color({
+class MyColor {
+  MyColor({
     required this.code,
     required this.name,
   });

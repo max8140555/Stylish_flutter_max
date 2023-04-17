@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:stylish_max/network/bloc/product_bloc.dart';
+import 'package:stylish_max/network/bloc/multiple_product_bloc.dart';
+import 'package:stylish_max/network/bloc/single_product_bloc.dart';
 import 'package:stylish_max/network/repository/stylish_repository.dart';
 import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
@@ -18,25 +20,36 @@ class StylishApp extends StatelessWidget {
   Widget build(BuildContext context) {
     StylishRepository stylishRepository = StylishRepositoryImpl();
 
+    final router = GoRouter(routes: [
+      GoRoute(name: "home", path: '/', builder: (context, state) => const HomePage(), routes: [
+        GoRoute(
+          name: "product",
+          path: 'product/:productId',
+          builder: (context, state) => ChangeNotifierProvider<DetailPageViewModel>(
+            create: (_) => DetailPageViewModel(),
+            child: DetailPage(
+              productId: state.params["productId"],
+            ),
+          ),
+        ),
+      ]),
+    ]);
+
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => ProductListBloc(stylishRepository),
+            create: (_) => MultipleProductBloc(stylishRepository),
+          ),
+          BlocProvider(
+            create: (_) => SingleProductBloc(stylishRepository),
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           title: 'Stylish',
           theme: ThemeData(
             primaryColor: Colors.grey[200],
           ),
-          home: const HomePage(),
-          routes: {
-            DetailPage.routeName: (context) =>
-                ChangeNotifierProvider<DetailPageViewModel>(
-                  create: (_) => DetailPageViewModel(),
-                  child: DetailPage(),
-                ),
-          },
+          routerConfig: router,
         ));
   }
 }

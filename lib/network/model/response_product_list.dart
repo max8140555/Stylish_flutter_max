@@ -19,6 +19,19 @@ class ResponseProductList {
 }
 
 @JsonSerializable()
+class ResponseProduct {
+  ResponseProduct({
+    required this.data,
+  });
+
+  ResponseDatum? data;
+
+  factory ResponseProduct.fromJson(Map<String, dynamic> json) =>
+      _$ResponseProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ResponseProductToJson(this);
+}
+
+@JsonSerializable()
 class ResponseDatum {
   ResponseDatum({
     required this.id,

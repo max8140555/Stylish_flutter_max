@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish_max/models/product.dart';
-import 'package:stylish_max/network/api_state.dart';
-import 'package:stylish_max/network/bloc/product_bloc.dart';
-import 'package:stylish_max/screens/home/widgets/home_big_screen_widget.dart';
+import 'package:stylish_max/network/bloc/multiple_product_bloc.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_banner.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_list_item.dart';
-import 'package:stylish_max/screens/home/widgets/home_small_screen_widget.dart';
 import 'package:stylish_max/values/text_styles.dart';
 import 'package:stylish_max/widgets/stylish_app_bar.dart';
 
@@ -18,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late List<DoNothingAction> productList;
 
   @override
   void initState() {
@@ -27,29 +23,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final dio = Dio();
-
-    // Future<ResponseProductList> getHttp() async {
-    //   final response =
-    //       await dio.get('https://api.appworks-school.tw/api/1.0/products/all');
-    //   print("Max123 ${ResponseProductList.fromJson(response.extra)}");
-    //   return ResponseProductList.fromJson(response.extra);
-    // }
-
-    var productListBloc = context.read<ProductListBloc>();
+    var multipleProductBloc = context.read<MultipleProductBloc>();
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        productListBloc.add(ProductListEvent.getProductListEvent("men"));
+        multipleProductBloc.add(MultipleProductEvent.getProductListEvent("men"));
         bool isBigScreen = constraints.maxWidth >= 800;
-        // var a = getHttp();
-        Widget getScreen() {
-          if (isBigScreen) {
-            return HomeBigScreenWidget();
-          } else {
-            return HomeSmallScreenWidget();
-          }
-        }
 
         return Scaffold(
           appBar: const StylishAppBar(),
@@ -82,20 +61,20 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: GestureDetector(
-                              onTap: () => productListBloc.add(ProductListEvent.getProductListEvent("men")),
+                              onTap: () => multipleProductBloc.add(MultipleProductEvent.getProductListEvent("men")),
                               child: Text("Men", style: smallTextStyle),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: GestureDetector(
-                                onTap: () => productListBloc.add(ProductListEvent.getProductListEvent("women")),
+                                onTap: () => multipleProductBloc.add(MultipleProductEvent.getProductListEvent("women")),
                                 child: Text("Women", style: smallTextStyle)),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: GestureDetector(
-                                onTap: () => productListBloc.add(ProductListEvent.getProductListEvent("accessories")),
+                                onTap: () => multipleProductBloc.add(MultipleProductEvent.getProductListEvent("accessories")),
                                 child: Text("Accessories", style: smallTextStyle)),
                           )
                         ],
@@ -103,9 +82,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Expanded(
-                    child: BlocBuilder<ProductListBloc, ApiState>(
+                    child: BlocBuilder<MultipleProductBloc, MultipleProductState>(
                       builder: (context, state) {
-                        if (state is ApiSuccessState) {
+                        if (state is MultipleProductSuccess) {
                           var productList = state.data as ProductList;
                           return GridView.count(
                             crossAxisCount: isBigScreen ? 3 : 1,
