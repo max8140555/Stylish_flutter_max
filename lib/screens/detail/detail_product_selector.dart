@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:stylish_max/models/product.dart';
 import 'package:stylish_max/screens/detail/component/color_selector_list.dart';
@@ -74,22 +75,47 @@ class DetailProductSelector extends StatelessWidget {
                     minusQtyListener: viewModel.minusQty,
                   )),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: SizedBox(
-                  height: 50,
-                  width: 150,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Colors.black,
-                        width: 1,
+            Row(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: SizedBox(
+                      height: 50,
+                      width: 150,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.black,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(child: Text('加入購物車')),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(child: Text('加入購物車')),
-                  ),
-                )),
+                    )),
+                Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).go('/payment');
+                      },
+                      child: SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(child: Text('直接購買')),
+                        ),
+                      ),
+                    )),
+              ],
+            )
           ],
         );
       },

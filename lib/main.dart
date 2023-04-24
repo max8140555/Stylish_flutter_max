@@ -20,20 +20,27 @@ class StylishApp extends StatelessWidget {
   Widget build(BuildContext context) {
     StylishRepository stylishRepository = StylishRepositoryImpl();
 
-    final router = GoRouter(routes: [
-      GoRoute(name: "home", path: '/', builder: (context, state) => const HomePage(), routes: [
+    final router = GoRouter(
+      routes: [
         GoRoute(
-          name: "product",
-          path: 'product/:productId',
-          builder: (context, state) => ChangeNotifierProvider<DetailPageViewModel>(
-            create: (_) => DetailPageViewModel(),
-            child: DetailPage(
-              productId: state.params["productId"],
+          name: "home",
+          path: '/',
+          builder: (context, state) => const HomePage(),
+          routes: [
+            GoRoute(
+              name: "product",
+              path: 'product/:productId',
+              builder: (context, state) => ChangeNotifierProvider<DetailPageViewModel>(
+                create: (_) => DetailPageViewModel(),
+                child: DetailPage(
+                  productId: state.params["productId"],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ]),
-    ]);
+      ],
+    );
 
     return MultiBlocProvider(
         providers: [
