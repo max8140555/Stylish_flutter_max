@@ -81,7 +81,7 @@ class DetailProductSelector extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0),
                     child: SizedBox(
                       height: 50,
-                      width: 150,
+                      width: 100,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(
@@ -101,7 +101,7 @@ class DetailProductSelector extends StatelessWidget {
                       },
                       child: SizedBox(
                         height: 50,
-                        width: 150,
+                        width: 100,
                         child: Card(
                           shape: RoundedRectangleBorder(
                             side: const BorderSide(

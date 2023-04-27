@@ -39,17 +39,17 @@ class StylishApp extends StatelessWidget {
                 ),
               ),
             ),
+            GoRoute(
+              name: "payment",
+              path: 'payment',
+              builder: (context, state) => PaymentPage(),
+            ),
+            GoRoute(
+              name: "map",
+              path: 'map',
+              builder: (context, state) => MapPage(),
+            ),
           ],
-        ),
-        GoRoute(
-          name: "/payment",
-          path: '/payment',
-          builder: (context, state) => PaymentPage(),
-        ),
-        GoRoute(
-          name: "/map",
-          path: '/map',
-          builder: (context, state) => MapPage(),
         ),
       ],
     );
