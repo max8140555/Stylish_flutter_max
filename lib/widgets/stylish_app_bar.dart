@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stylish_max/values/text_styles.dart';
 
 class StylishAppBar extends StatelessWidget implements PreferredSizeWidget {
   const StylishAppBar({Key? key}) : super(key: key);

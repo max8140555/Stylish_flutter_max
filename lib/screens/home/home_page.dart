@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stylish_max/models/product.dart';
 import 'package:stylish_max/network/bloc/multiple_product_bloc.dart';
 import 'package:stylish_max/screens/home/widgets/home_page_banner.dart';
@@ -102,6 +103,16 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                     ),
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).go('/map');
+                        },
+                        child: Text("Map",style: bigTextStyle),
+                      )
+                    ],
                   )
                 ],
               ),

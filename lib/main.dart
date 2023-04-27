@@ -8,6 +8,8 @@ import 'package:stylish_max/network/repository/stylish_repository.dart';
 import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
+import 'package:stylish_max/screens/map/map_page.dart';
+import 'package:stylish_max/screens/payment/payment.dart';
 
 void main() {
   runApp(const StylishApp());
@@ -38,6 +40,16 @@ class StylishApp extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        GoRoute(
+          name: "/payment",
+          path: '/payment',
+          builder: (context, state) => PaymentPage(),
+        ),
+        GoRoute(
+          name: "/map",
+          path: '/map',
+          builder: (context, state) => MapPage(),
         ),
       ],
     );
