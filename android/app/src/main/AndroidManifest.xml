@@ -2,7 +2,6 @@
     package="com.example.stylish_max">
    <application
         android:label="stylish_max"
-        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -31,6 +30,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyDv8P7WWMCvp2GmJY6jbQp6aj9P4LwS5rw"/>
+           android:value="${flutterGoogleMapAPiKey}"/>
     </application>
 </manifest>
