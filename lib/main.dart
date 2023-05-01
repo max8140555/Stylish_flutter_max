@@ -9,7 +9,6 @@ import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
 import 'package:stylish_max/screens/map/map_page.dart';
-import 'package:stylish_max/screens/map/map_sample.dart';
 import 'package:stylish_max/screens/payment/payment.dart';
 
 void main() {
@@ -48,7 +47,7 @@ class StylishApp extends StatelessWidget {
             GoRoute(
               name: "map",
               path: 'map',
-              builder: (context, state) => MapSample(),
+              builder: (context, state) => MapPage(),
             ),
           ],
         ),

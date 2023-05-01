@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           GoRouter.of(context).go('/map');
                         },
-                        child: Text("Map",style: bigTextStyle),
+                        child: Text("實體店地點",style: bigTextStyle),
                       )
                     ],
                   )
