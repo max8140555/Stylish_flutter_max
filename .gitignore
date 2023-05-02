@@ -9,7 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
-
+ios/Runner/Keys.plist
 # IntelliJ related
 *.iml
 *.ipr
