@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:stylish_max/network/bloc/multiple_product_bloc.dart';
 import 'package:stylish_max/network/bloc/single_product_bloc.dart';
 import 'package:stylish_max/network/repository/stylish_repository.dart';
+import 'package:stylish_max/screens/ar/ar_page.dart';
 import 'package:stylish_max/screens/detail/detail_page.dart';
 import 'package:stylish_max/screens/detail/detail_page_view_model.dart';
 import 'package:stylish_max/screens/home/home_page.dart';
@@ -48,6 +49,11 @@ class StylishApp extends StatelessWidget {
               name: "map",
               path: 'map',
               builder: (context, state) => MapPage(),
+            ),
+            GoRoute(
+              name: "ar",
+              path: 'ar',
+              builder: (context, state) => ArPage(),
             ),
           ],
         ),

@@ -111,6 +111,12 @@ class _HomePageState extends State<HomePage> {
                           GoRouter.of(context).go('/map');
                         },
                         child: Text("實體店地點",style: bigTextStyle),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).go('/ar');
+                        },
+                        child: Text("AR",style: bigTextStyle),
                       )
                     ],
                   )

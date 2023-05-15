@@ -42,6 +42,9 @@ dependencies:
   google_maps_flutter: ^2.2.5
   google_maps_flutter_web: ^0.4.0+8
   flutter_dotenv: ^5.0.2
+  arkit_plugin: ^1.0.6
+  arcore_flutter_plugin: ^0.1.0
+  vector_math: ^2.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
