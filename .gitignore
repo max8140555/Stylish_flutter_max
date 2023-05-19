@@ -31,7 +31,7 @@ ios/Runner/Keys.plist
 .pub-cache/
 .pub/
 /build/
-/lib/.env
+/web/config.js
 # Symbolication related
 app.*.symbols
 
